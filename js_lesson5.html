@@ -1,0 +1,57 @@
+<!-- • Написать функцию преобразования цвета из 10-ного представления в 16-ный. Функция должна принимать 3 числа от 0 до 255 и возвращать строковый хеш.
+• Написать функцию, преобразующую число в объект. Передавая на вход число от 0 до 999, мы должны получить на выходе объект, в котором в соответствующих свойствах описаны единицы, десятки и сотни. Например для числа 245 мы должны получить следующий объект: {‘единицы’: 5, ‘десятки’: 4, 'сотни’: 2}. Если число превышает 999, необходимо выдать соответствующее сообщение с помощью console.log и вернуть пустой объект.
+• * Реализовать функцию objectToQueryString(object), которая принимает аргументом объект, возвращает строку. Примеры работы:console.log(objectToQueryString({user: 'Dmitry'})); // user=Dmitry console.log(objectToQueryString({user: 'Dmitry', password: 'pass'})); // user=Dmitry&password=pass console.log(objectToQueryString({user: 'Dmitry', password: 'pass', id=1})); // user=Dmitry&password=pass&id=1 -->
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8">
+ <title></title>
+</head>
+<body>
+ <script>
+  function rgbtoHex(r,g,b){
+  function decimal(dec){
+      if(dec>255||dec<0) {
+          return false;
+      } else {
+          return dec > 15 ? dec.toString(16) : '0' + dec.toString(16);
+      }
+  }
+  var result = [decimal(r),decimal(g),decimal(b)]
+  return result;
+  }
+  console.log("#" + rgbtoHex(1,29,213));
+
+  function numbertoObject(n){
+   if(n>999 || n<0){
+    console.log('Введеное число не входит в диапозон 0-999');
+    var obj={};
+    return obj;
+  } else {
+    var result=['единицы','десятки','сотни'];
+    var object={};
+    for(var i=0; n!=0; i++){
+      object[result[i]]=n%10;
+      n=(n-n%10)/10;
+    }
+    } 
+    return object;
+  }
+  console.log(numbertoObject(245));
+
+
+  function objectToQueryString(obj) {
+   return Object.keys(obj).join('&');
+   function key(k){
+   return k + '=' + obj[k]; 
+   }
+  }
+  console.log(objectToQueryString({user: 'Dmitry'}));
+  console.log(objectToQueryString({user: 'Dmitry', password: 'pass'}));
+  console.log(objectToQueryString({user: 'Dmitry', password: 'pass', id:1}));
+ </script>
+</body>
+</html> 
+
